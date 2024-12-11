@@ -1,12 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-table-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ScrollingModule],
   template: `
-    <table>
+    <!-- Tabla con scroll virtual -->
+    <cdk-virtual-scroll-viewport
+      *ngIf="data.length > 10"
+      itemSize="50"
+      style="height: 400px; width: 100%;"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns">{{ column }}</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *cdkVirtualFor="let row of data">
+            <td *ngFor="let column of columns">{{ row[column] }}</td>
+            <td>
+              <button (click)="onDetailsClick(row)">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+
+    <!-- Tabla sin scroll virtual -->
+    <table *ngIf="data.length <= 10">
       <thead>
         <tr>
           <th *ngFor="let column of columns">{{ column }}</th>
@@ -29,9 +55,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         width: 100%;
         border-collapse: collapse;
       }
-      th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
+      }
+      cdk-virtual-scroll-viewport {
+        border: 1px solid #ddd;
       }
     `,
   ],
