@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as BrandActions from '../actions/brands.actions';
-import { Brand } from './../models/brand.model';
+import { Brand } from '../models/vehicle.model';
 
 export interface State {
   brands: Brand[];

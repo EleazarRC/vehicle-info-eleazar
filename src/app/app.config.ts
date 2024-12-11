@@ -13,6 +13,10 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
 import { brandsReducer } from './state/reducers/brands.reducer';
 import { BrandsEffects } from './state/effects/brands.effects';
+import { vehicleTypesReducer } from './state/reducers/vehicle-types.reducer';
+import { modelsReducer } from './state/reducers/models.reducer';
+import { VehicleTypesEffects } from './state/effects/vehicle-types.effects';
+import { ModelsEffects } from './state/effects/models.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +27,9 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(), 
     provideState('brands', brandsReducer),
-    provideEffects(BrandsEffects),
+    provideState('vehicleTypes', vehicleTypesReducer),
+    provideState('models', modelsReducer),
+    provideEffects(BrandsEffects, VehicleTypesEffects, ModelsEffects),
     provideStoreDevtools(),
   ],
 };
