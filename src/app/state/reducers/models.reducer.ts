@@ -21,5 +21,8 @@ export const modelsReducer = createReducer(
   on(ModelsActions.loadModelsFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(ModelsActions.clearModels, () => ({
+    ...initialState,
   }))
 );

@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+cdk-virtual-scroll-viewport {
+    border: 1px solid #ddd;
+}
+
+mat-icon {
+    margin-right: 4px;
+}

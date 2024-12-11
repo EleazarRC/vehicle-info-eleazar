@@ -21,5 +21,8 @@ export const vehicleTypesReducer = createReducer(
   on(VehicleTypeActions.loadVehicleTypesFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(VehicleTypeActions.clearVehicleTypes, () => ({
+    ...initialState,
   }))
 );

@@ -1,1 +1,43 @@
-<p>table-component works!</p>
+<!-- Tabla con scroll virtual -->
+<cdk-virtual-scroll-viewport *ngIf="data.length > 10" itemSize="50" style="height: 400px; width: 100%;">
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{ column.header }}</th>
+                <th *ngIf="showActions">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *cdkVirtualFor="let row of data">
+                <td *ngFor="let column of columns">{{ row[column.field] }}</td>
+                <td *ngIf="showActions">
+                    <button mat-raised-button color="primary" (click)="onDetailsClick(row)">
+                        <mat-icon>visibility</mat-icon>
+                        Ver Detalles
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</cdk-virtual-scroll-viewport>
+
+<!-- Tabla sin scroll virtual (RESULTADOS BÚSQUEDA)-->
+<table *ngIf="data.length <= 10">
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns">{{ column.header }}</th>
+            <th *ngIf="showActions">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data">
+            <td *ngFor="let column of columns">{{ row[column.field] }}</td>
+            <td *ngIf="showActions">
+                <button mat-raised-button color="primary" (click)="onDetailsClick(row)">
+                    <mat-icon>visibility</mat-icon>
+                    Ver detalles
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

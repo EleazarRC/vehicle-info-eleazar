@@ -6,10 +6,7 @@ import { MenuBarComponent } from './shared/menu-bar/menu-bar.component';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, MenuBarComponent],
-  template: `
-    <app-menu-bar></app-menu-bar>
-    <router-outlet></router-outlet>
-  `,
-  styles: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-export class AppComponent {}
+export class AppComponent { }

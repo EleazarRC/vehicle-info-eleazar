@@ -15,3 +15,5 @@ export const loadModelsFailure = createAction(
   '[Models] Load Models Failure',
   props<{ error: any }>()
 );
+
+export const clearModels = createAction('[Models] Clear Models');

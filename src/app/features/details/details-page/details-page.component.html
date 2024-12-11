@@ -1,1 +1,20 @@
-<p>details-page works!</p>
+<h1>Detalles de {{ brandName }}</h1>
+
+<h2>Tipos de Vehículos</h2>
+<ng-container *ngIf="vehicleTypes.length > 0; else noVehicleTypes">
+    <app-search-bar (searchChange)="onSearchVehicleTypes($event)"></app-search-bar>
+    <app-table-component [columns]="vehicleTypeColumns" [data]="filteredVehicleTypes"
+        [showActions]="false"></app-table-component>
+</ng-container>
+<ng-template #noVehicleTypes>
+    <p class="no-data-message">No hay tipos de vehículos disponibles para esta marca.</p>
+</ng-template>
+
+<h2>Modelos</h2>
+<ng-container *ngIf="models.length > 0; else noModels">
+    <app-search-bar (searchChange)="onSearchModels($event)"></app-search-bar>
+    <app-table-component [columns]="modelColumns" [data]="filteredModels" [showActions]="false"></app-table-component>
+</ng-container>
+<ng-template #noModels>
+    <p class="no-data-message">No hay modelos disponibles para esta marca.</p>
+</ng-template>
