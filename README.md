@@ -96,6 +96,7 @@ const routes: Routes = [
 
 '': Página principal con listado de marcas.
 'details/:brandName': Página de detalles de la marca seleccionada.
+```
 
 ## UI y Diseño
 - Se emplea **Angular Material** para formularios (`mat-form-field`, `mat-input`) y botones (`mat-button`).
