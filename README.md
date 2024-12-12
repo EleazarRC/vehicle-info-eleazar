@@ -98,6 +98,9 @@ export const routes: Routes = [
 
 ## Pruebas
 **Unitarias (Jasmine/Karma):**  
+```
+ng test --code-coverage
+```
 - Reducers: Validar que el estado se actualiza correctamente.  
 - Selectors: Verificar que filtran y devuelven datos esperados.  
 - Componentes: Asegurar renderizado correcto y respuesta a eventos (ej. filtrado).
