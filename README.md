@@ -3,7 +3,12 @@
 **Autor:** Eleazar Ramos Cortés  
 **Fecha:** Diciembre 2024
 
-Este proyecto es una SPA (Single Page Application) desarrollada en Angular que muestra información de vehículos proveniente de la API oficial [https://vpic.nhtsa.dot.gov/api](https://vpic.nhtsa.dot.gov/api). El objetivo principal es listar marcas, ofrecer un buscador filtrado y, al seleccionar una marca, mostrar sus tipos de vehículos y modelos.
+Este proyecto es una Single Page Application (SPA) desarrollada con Angular. Su objetivo es mostrar de forma eficiente información sobre marcas de vehículos, obtenida de la API oficial de la NHTSA: [https://vpic.nhtsa.dot.gov/api](https://vpic.nhtsa.dot.gov/api).
+
+La aplicación permite:  
+- Listar marcas de vehículos con scroll virtual, evitando problemas de rendimiento ante grandes volúmenes de datos.  
+- Filtrar las marcas en tiempo real mediante un campo de búsqueda.  
+- Visualizar detalles de la marca seleccionada, mostrando sus tipos de vehículos y modelos disponibles.
 
 ## Índice
 1. [Objetivo y Alcance](#objetivo-y-alcance)  
@@ -17,118 +22,97 @@ Este proyecto es una SPA (Single Page Application) desarrollada en Angular que m
 9. [Ejecución](#ejecución)  
 10. [Futuras Mejoras](#futuras-mejoras)
 
-
 ## Objetivo y Alcance
-La aplicación muestra un listado de marcas con scroll virtual (permitiendo una carga óptima de grandes volúmenes de datos), un campo de búsqueda para filtrar las marcas en tiempo real, y una sección de detalles para cada marca seleccionada, mostrando sus tipos de vehículos y modelos.
+**Objetivo:**  
+Desarrollar una SPA que muestre marcas de vehículos, con filtrado en tiempo real y, al seleccionar una marca, visualizar tipos de vehículos y modelos. Todo ello gestionado con un estado global optimizado y una experiencia de usuario fluida.
 
-**Alcance:**
-- Mostrar lista de marcas con scroll virtual.
-- Buscador para filtrar por nombre.
-- Pantalla de detalles con tipos de vehículos y modelos.
-- Arquitectura basada en NgRx (actions, reducers, selectors, effects) para un manejo escalable del estado.
-- Uso de Angular Material para una apariencia moderna y componentes accesibles.
+**Alcance:**  
+- Listar marcas con virtual scroll, mejorando el rendimiento ante grandes listados.  
+- Buscador para filtrar dinámicamente las marcas.  
+- Página de detalles con tipos de vehículos y modelos disponibles.  
+- Manejo de estado mediante NgRx, asegurando escalabilidad y mantenibilidad.  
+- Uso de Angular Material para una apariencia moderna, responsive y accesible.
 
 ## Tecnologías y Herramientas
 - **Angular CLI:** 19.0.4  
-- **Node:** 22.12.0  
+- **Node.js:** 22.12.0  
 - **NPM:** 10.9.2  
 - **Angular Material:** 19.0.2  
-- **NgRx:** 19.0.0  
+- **NgRx:** 19.0.0 (Actions, Reducers, Effects, StoreDevtools)  
 - **RxJS:** 7.8  
-- **Testing:** Jasmine, Karma (Opcionalmente Cypress para E2E)
+- **Testing:** Jasmine, Karma (opcional Cypress para E2E)  
 - **Control de versiones:** GitHub (Repositorio: [EleazarRC/vehicle-info-eleazar](#))
 
 ## Estructura del Proyecto
-La estructura busca claridad, modularidad y escalabilidad:
+La organización del código sigue un patrón escalable y modular:
 
-src/
-├── app/
-│   ├── core/               # Servicios globales, interceptores, guardias
-│   │   ├── services/
-│   │   ├── interceptors/
-│   │   ├── guards/
-│   ├── shared/             # Componentes, pipes, directivas reutilizables
-│   │   ├── components/
-│   │   ├── directives/
-│   │   ├── pipes/
-│   ├── state/              # Configuración de NgRx
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   ├── selectors/
-│   │   ├── effects/
-│   │   ├── models/
-│   │   ├── state.module.ts/
-│   ├── features/           # Módulos funcionales de la aplicación
-│   │   ├── brands/         # Funcionalidad relacionada con marcas
-│   │   │   ├── components/
-│   │   │   ├── pages/
-│   │   │   ├── services/
-│   │   │   ├── state/
-│   │   ├── details/        # Página de detalles de marca
-│   │       ├── components/
-│   │       ├── pages/
-│   │       ├── services/
-│   │       ├── state/
-│   ├── app-routing.module.ts
-│   ├── app.component.ts
-│   ├── app.module.ts
-├── assets/                 # Imágenes, estilos globales, etc.
-├── environments/           # Configuración para dev y producción
+- **core/**: Servicios globales, interceptores, guardias.  
+- **shared/**: Componentes, directivas y pipes reutilizables (ej. SearchBar, TableComponent).  
+- **features/**:  
+  - **brands/**: Lógica relacionada con las marcas (página principal con listado y filtrado).  
+  - **details/**: Lógica para mostrar detalles de una marca seleccionada (tipos de vehículos, modelos).
+- **state/**:  
+  - actions, reducers, selectors, effects: Todo lo relacionado con NgRx.
+- **models/**: Interfaces y tipos (Brand, VehicleType, Model).
+
+Esta estructura facilita la escalabilidad, la mantenibilidad y la colaboración entre equipos.
 
 ## Estado Global con NgRx
-Se utiliza NgRx para:
-- Acciones (`actions`) que disparan carga de datos o filtros.
-- Reducers (`reducers`) que mantienen el estado inmutable de marcas, modelos, tipos.
-- Selectors (`selectors`) para extraer datos ya procesados y listos para ser consumidos por los componentes.
-- Effects (`effects`) que interactúan con la API usando servicios, despachando acciones según resultado.
+Se emplea NgRx para una gestión centralizada y reactiva del estado:
+- **Actions:** Definen eventos del dominio (ej. `loadBrands`, `loadModels`, `loadVehicleTypes`).
+- **Reducers:** Actualizan el estado inmutable según las acciones disparadas.
+- **Selectors:** Extraen datos procesados del store para los componentes.
+- **Effects:** Manejan lógica asíncrona (ej. llamadas HTTP a la API), despachando acciones success/failure.
 
-**Ejemplo de Flujo:**
-1. `loadBrands` action → `brands.effects.ts` → llama a la API → `brands.reducer.ts` actualiza el estado con las marcas.
-2. Componente `brands-page` usa un selector `selectAllBrands` para obtener el listado y mostrarlas en la tabla con scroll virtual.
+Ejemplo de Flujo:
+1. `loadBrands` → `BrandsEffects` llama a la API → `brandsReducer` almacena las marcas.
+2. `BrandsPageComponent` usa `selectAllBrands` para obtener la lista y renderizarla con scroll virtual.
 
 ## Navegación y Rutas
+La aplicación está configurada para Lazy Loading:
 ```typescript
-const routes: Routes = [
-  { path: '', component: BrandsPageComponent },
-  { path: 'details/:brandName', component: DetailsPageComponent },
-  { path: '**', redirectTo: '' }
+export const routes: Routes = [
+  { path: '', redirectTo: 'brands', pathMatch: 'full' },
+  { path: 'brands', loadComponent: () => import('./features/brands/brands-page/brands-page.component').then(m => m.BrandsPageComponent) },
+  { path: 'details/:brandName', loadComponent: () => import('./features/details/details-page/details-page.component').then(m => m.DetailsPageComponent) },
+  { path: '**', redirectTo: 'brands' }
 ];
-
-'': Página principal con listado de marcas.
-'details/:brandName': Página de detalles de la marca seleccionada.
+'/brands': Página principal con listado de marcas.
+'/details/:brandName': Página de detalles de la marca seleccionada.
 ```
 
 ## UI y Diseño
-- Se emplea **Angular Material** para formularios (`mat-form-field`, `mat-input`) y botones (`mat-button`).
-- Scroll virtual con `cdk-virtual-scroll-viewport` para mostrar grandes listas sin afectar el rendimiento.
-- Un **SearchBarComponent** con input filtrante.
-- Un **TableComponent** personalizado, usando virtual scroll y estilos limpios, con altura fija para un rendimiento óptimo.
-- Estilos **SCSS** organizados y coherentes para dar una apariencia profesional y responsiva.
+- **Angular Material** en formularios, botones, toolbar, para mejorar usabilidad y accesibilidad.
+- **cdk-virtual-scroll-viewport** para manejar listados extensos sin penalizar el rendimiento.
+- **SearchBarComponent:** Campo filtrante con `mat-form-field` y `matInput`.
+- **TableComponent:** Tabla personalizada, sin `mat-table`, optimizada para scroll virtual, con estilos SCSS coherentes, tipografía Roboto y look profesional.
+- Diseño responsive y escalable, con OnPush + trackBy para rendimiento óptimo.
 
 ## Buenas Prácticas
-- **Modularidad:** Dividir la app en módulos lógicos (features).
-- **OnPush Change Detection:** Mejorar rendimiento con vistas grandes.
-- **TrackBy en *ngFor:** Reducir re-renders.
-- **Paginación / Lazy Loading:** Considerado para manejar grandes datasets sin bloquear la UI.
-- **Tipado estricto:** Configuración `strict` en `tsconfig.json`.
-- **Tests:** Unit testing para componentes, servicios y reducers.
+- **Modularidad:** Cada sección funcional en su propio espacio (features).
+- **OnPush Change Detection:** Minimiza renders innecesarios.
+- **TrackBy en *ngFor:** Evita redibujar elementos sin cambios.
+- **Tipado estricto:** `strict` en `tsconfig.json` para mayor robustez.
+- **Uso de NgRx:** Garantiza escalabilidad, separación de responsabilidades y mantenimiento sencillo.
+- **Testing ready:** Configuración para tests unitarios en acciones, reducers, selectors y componentes.
 
 ## Pruebas
-**Unitarias (Jasmine/Karma):**
-- Reducers: verificar actualización correcta del estado.
-- Selectors: comprobar que filtran y devuelven datos esperados.
-- Componentes: asegurar que renderizan datos y responden a eventos (ej. filtrado).
+**Unitarias (Jasmine/Karma):**  
+- Reducers: Validar que el estado se actualiza correctamente.  
+- Selectors: Verificar que filtran y devuelven datos esperados.  
+- Componentes: Asegurar renderizado correcto y respuesta a eventos (ej. filtrado).
 
-**E2E (Cypress) (Opcional, no implementado en esta versión, pero recomendado):**
-- Flujo completo: Cargar página de marcas, filtrar una marca, seleccionar y navegar a detalles, comprobar datos.
+**E2E (Cypress) (Opcional):**  
+- Testear el flujo completo: cargar marcas, filtrar, seleccionar una marca y ver detalles.
 
 ## Ejecución
-- Instalar dependencias: `npm install`
-- Ejecutar servidor dev: `ng serve`
-- Navegar a [http://localhost:4200](http://localhost:4200) en el navegador.
-
+Instalar dependencias:
+```bash
+npm install
+ng serve
+```
 ## Futuras Mejoras
-- Añadir paginación desde el servidor para datasets aún más grandes.
-- Internacionalización (i18n).
-- Tests E2E con Cypress.
-- Mejora de accesibilidad (ARIA labels, roles).
+**Paginación desde el servidor:** Para manejar datasets gigantes sin cargar todo de golpe.
+**Internacionalización (i18n):** Adaptar la app a múltiples idiomas.
+**Tests E2E con Cypress:** Garantizar la calidad en flujos completos.
+**Accesibilidad (ARIA):** Mejorar soporte para lectores de pantalla, teclados, etc.
