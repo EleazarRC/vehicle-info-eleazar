@@ -1,43 +1,37 @@
-<!-- Tabla con scroll virtual -->
-<cdk-virtual-scroll-viewport *ngIf="data.length > 10" itemSize="50" style="height: 400px; width: 100%;">
-    <table>
-        <thead>
-            <tr>
-                <th *ngFor="let column of columns">{{ column.header }}</th>
-                <th *ngIf="showActions">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *cdkVirtualFor="let row of data">
-                <td *ngFor="let column of columns">{{ row[column.field] }}</td>
-                <td *ngIf="showActions">
-                    <button mat-raised-button color="primary" (click)="onDetailsClick(row)">
-                        <mat-icon>visibility</mat-icon>
-                        Ver Detalles
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</cdk-virtual-scroll-viewport>
-
-<!-- Tabla sin scroll virtual (RESULTADOS BÚSQUEDA)-->
-<table *ngIf="data.length <= 10">
+<!-- 
+"He optado por no utilizar mat-table porque no existe una integración
+ directa y sencilla con cdk-virtual-scroll-viewport. Al intentar 
+ combinarlos surgen problemas técnicos y errores relacionados 
+ con las directivas internas de la tabla. Además, la implementación
+ con mat-table puede resultar más pesada de mantener y menos eficiente
+ frente a grandes volúmenes de datos. En cambio, 
+ utilizando una tabla HTML simple junto con cdk-virtual-scroll-viewport, 
+ he logrado una carga inicial más rápida y un rendimiento óptimo en el 
+ renderizado de miles de filas, manteniendo a la vez la experiencia 
+ de usuario fluida y sin bloqueos."  
+-->
+<cdk-virtual-scroll-viewport [itemSize]="50" style="height: 400px; width: 100%">
+  <table>
     <thead>
-        <tr>
-            <th *ngFor="let column of columns">{{ column.header }}</th>
-            <th *ngIf="showActions">Acciones</th>
-        </tr>
+      <tr>
+        <th *ngFor="let column of columns">{{ column.header }}</th>
+        <th *ngIf="showActions">Acciones</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of data">
-            <td *ngFor="let column of columns">{{ row[column.field] }}</td>
-            <td *ngIf="showActions">
-                <button mat-raised-button color="primary" (click)="onDetailsClick(row)">
-                    <mat-icon>visibility</mat-icon>
-                    Ver detalles
-                </button>
-            </td>
-        </tr>
+      <tr *cdkVirtualFor="let row of data; trackBy: trackByFn">
+        <td *ngFor="let column of columns">{{ row[column.field] }}</td>
+        <td *ngIf="showActions">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onDetailsClick(row)"
+          >
+            <mat-icon>visibility</mat-icon>
+            Ver Detalles
+          </button>
+        </td>
+      </tr>
     </tbody>
-</table>
+  </table>
+</cdk-virtual-scroll-viewport>
