@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideRouter } from '@angular/router';
@@ -25,7 +29,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     importProvidersFrom(BrowserAnimationsModule, MatSnackBarModule),
     provideHttpClient(),
-    provideStore(), 
+    provideStore(),
     provideState('brands', brandsReducer),
     provideState('vehicleTypes', vehicleTypesReducer),
     provideState('models', modelsReducer),

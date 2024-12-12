@@ -3,7 +3,7 @@ import { Model } from '../models/vehicle.model';
 
 export const loadModels = createAction(
   '[Models] Load Models',
-  props<{ make: string }>() // La marca que queremos cargar
+  props<{ make: string }>()
 );
 
 export const loadModelsSuccess = createAction(

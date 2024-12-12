@@ -14,17 +14,17 @@ import { TableColumn } from '../../../models/table-column.model';
   standalone: true,
   imports: [CommonModule, TableComponent, SearchBarComponent],
   templateUrl: './brands-page.component.html',
-  styleUrls: ['./brands-page.component.scss']
+  styleUrls: ['./brands-page.component.scss'],
 })
 export class BrandsPageComponent implements OnInit {
   columns: TableColumn[] = [
     { field: 'Make_ID', header: 'Id' },
-    { field: 'Make_Name', header: 'Marca' }
+    { field: 'Make_Name', header: 'Marca' },
   ];
   data: Brand[] = [];
   filteredData: Brand[] = this.data;
 
-  constructor(private store: Store, private router: Router) { }
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadBrands());

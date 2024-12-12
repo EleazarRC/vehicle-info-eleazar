@@ -8,8 +8,14 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-menu-bar',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+  ],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss',
 })
-export class MenuBarComponent { }
+export class MenuBarComponent {}

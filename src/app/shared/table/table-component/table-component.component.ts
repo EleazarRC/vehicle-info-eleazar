@@ -26,7 +26,7 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
-    CdkTableModule      
+    CdkTableModule,
   ],
   templateUrl: './table-component.component.html',
   styleUrl: './table-component.component.scss',
@@ -47,7 +47,6 @@ export class TableComponent {
   }
 
   trackByFn(index: number, item: any) {
-    // Usa un ID único si existe, de lo contrario index
     return item?.Make_ID ?? item?.VehicleTypeId ?? index;
   }
 }

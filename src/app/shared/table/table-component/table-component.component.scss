@@ -1,71 +1,70 @@
 :host {
-    display: block;
-    
-    cdk-virtual-scroll-viewport {
-      height: 400px;
+  display: block;
+
+  cdk-virtual-scroll-viewport {
+    height: 400px;
+    width: 100%;
+    overflow: auto;
+    background: #fff;
+
+    table {
       width: 100%;
-      overflow: auto;
-      background: #fff;
-  
-      table {
-        width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-        font-family: sans-serif;
-        font-size: 14px;
-        color: #333;
-  
-        thead {
-          background: #daf0ff;
-          
-          th {
-            font-weight: 600;
-            font-size: 14px;
-            color: #333;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #333;
+
+      thead {
+        background: #daf0ff;
+
+        th {
+          font-weight: 600;
+          font-size: 14px;
+          color: #333;
+          padding: 8px 12px;
+          text-align: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        th:first-child {
+          width: 80px;
+        }
+      }
+
+      tbody {
+        tr {
+          transition: background 0.2s ease;
+
+          &:hover {
+            background: #eefaff;
+          }
+
+          td {
             padding: 8px 12px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; 
-          }
-  
-          th:first-child {
-            width: 80px;
-          }
-        }
-  
-        tbody {
-          tr {
-            transition: background 0.2s ease;
-            
-            &:hover {
-              background: #eefaff;
+            text-overflow: ellipsis;
+            border-bottom: 1px solid #eee;
+
+            &:first-child {
+              width: 80px;
+              color: #222;
             }
-  
-            td {
-              padding: 8px 12px;
-              text-align: left;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              border-bottom: 1px solid #eee; // línea gris muy clara entre filas
-  
-              &:first-child {
-                width: 80px;
-                color: #222; 
+
+            &:last-child {
+              button[mat-raised-button] {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                white-space: nowrap;
               }
-  
-              &:last-child {
-                button[mat-raised-button] {
-                  display: flex;
-                  align-items: center;
-                  gap: 4px;
-                  white-space: nowrap;
-                }
-  
-                mat-icon {
-                  vertical-align: middle;
-                }
+
+              mat-icon {
+                vertical-align: middle;
               }
             }
           }
@@ -73,4 +72,4 @@
       }
     }
   }
-  
+}

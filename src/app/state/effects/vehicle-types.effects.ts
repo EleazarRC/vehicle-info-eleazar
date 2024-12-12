@@ -13,8 +13,12 @@ export class VehicleTypesEffects {
       ofType(VehicleTypeActions.loadVehicleTypes),
       mergeMap(({ make }) =>
         this.apiService.getVehicleTypesForMake(make).pipe(
-          map((vehicleTypes) => VehicleTypeActions.loadVehicleTypesSuccess({ vehicleTypes })),
-          catchError((error) => of(VehicleTypeActions.loadVehicleTypesFailure({ error })))
+          map((vehicleTypes) =>
+            VehicleTypeActions.loadVehicleTypesSuccess({ vehicleTypes })
+          ),
+          catchError((error) =>
+            of(VehicleTypeActions.loadVehicleTypesFailure({ error }))
+          )
         )
       )
     )

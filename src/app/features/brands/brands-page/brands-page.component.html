@@ -1,4 +1,8 @@
 <h1>Marcas</h1>
 <app-search-bar (searchChange)="onSearch($event)"></app-search-bar>
-<app-table-component [columns]="columns" [data]="filteredData" [showActions]="true"
-    (detailsClick)="onViewDetails($event)"></app-table-component>
+<app-table-component
+  [columns]="columns"
+  [data]="filteredData"
+  [showActions]="true"
+  (detailsClick)="onViewDetails($event)"
+></app-table-component>

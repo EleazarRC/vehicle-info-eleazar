@@ -5,7 +5,10 @@ import { SearchBarComponent } from '../../../shared/search-bar/search-bar/search
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { VehicleType, Model } from '../../../state/models/vehicle.model';
-import { clearVehicleTypes, loadVehicleTypes } from '../../../state/actions/vehicle-types.actions';
+import {
+  clearVehicleTypes,
+  loadVehicleTypes,
+} from '../../../state/actions/vehicle-types.actions';
 import { clearModels, loadModels } from '../../../state/actions/models.actions';
 import { selectAllVehicleTypes } from '../../../state/selectors/vehicle-types.selectors';
 import { selectAllModels } from '../../../state/selectors/models.selectors';
@@ -17,17 +20,16 @@ import { TableColumn } from '../../../models/table-column.model';
   imports: [CommonModule, TableComponent, SearchBarComponent],
   templateUrl: './details-page.component.html',
   styleUrl: './details-page.component.scss',
-
 })
 export class DetailsPageComponent implements OnInit {
   brandName: string = '';
   vehicleTypeColumns: TableColumn[] = [
     { field: 'VehicleTypeId', header: 'Id' },
-    { field: 'VehicleTypeName', header: 'Tipo' }
+    { field: 'VehicleTypeName', header: 'Tipo' },
   ];
   modelColumns: TableColumn[] = [
     { field: 'Model_ID', header: 'Id' },
-    { field: 'Model_Name', header: 'Modelo' }
+    { field: 'Model_Name', header: 'Modelo' },
   ];
 
   vehicleTypes: VehicleType[] = [];
@@ -35,7 +37,7 @@ export class DetailsPageComponent implements OnInit {
   filteredVehicleTypes: VehicleType[] = this.vehicleTypes;
   filteredModels: Model[] = this.models;
 
-  constructor(private store: Store, private route: ActivatedRoute) { }
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

@@ -6,9 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CommonModule,MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
 })
 export class SearchBarComponent {
   @Output() searchChange = new EventEmitter<string>();

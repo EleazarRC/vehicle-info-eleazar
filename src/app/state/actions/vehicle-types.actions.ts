@@ -16,4 +16,6 @@ export const loadVehicleTypesFailure = createAction(
   props<{ error: any }>()
 );
 
-export const clearVehicleTypes = createAction('[Vehicle Types] Clear Vehicle Types');
+export const clearVehicleTypes = createAction(
+  '[Vehicle Types] Clear Vehicle Types'
+);
