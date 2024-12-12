@@ -115,7 +115,7 @@ npm install
 ng serve
 ```
 ## Futuras Mejoras
-**Paginación desde el servidor:** Para manejar datasets gigantes sin cargar todo de golpe.
-**Internacionalización (i18n):** Adaptar la app a múltiples idiomas.
-**Tests E2E con Cypress:** Garantizar la calidad en flujos completos.
-**Accesibilidad (ARIA):** Mejorar soporte para lectores de pantalla, teclados, etc.
+- **Paginación desde el servidor:** Para manejar datasets gigantes sin cargar todo de golpe.
+- **Internacionalización (i18n):** Adaptar la app a múltiples idiomas.
+- **Tests E2E con Cypress:** Garantizar la calidad en flujos completos.
+- **Accesibilidad (ARIA):** Mejorar soporte para lectores de pantalla, teclados, etc.
