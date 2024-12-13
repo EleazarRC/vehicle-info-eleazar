@@ -38,7 +38,7 @@ Desarrollar una SPA que muestre marcas de vehículos, con filtrado en tiempo rea
 - **Node.js:** 22.12.0  
 - **NPM:** 10.9.2  
 - **Angular Material:** 19.0.2  
-- **NgRx:** 19.0.0 (Actions, Reducers, Effects, StoreDevtools)  
+- **NgRx:** 19.0.0
 - **RxJS:** 7.8  
 - **Testing:** Jasmine, Karma y Cypress para E2E
 - **Control de versiones:** GitHub (Repositorio: [EleazarRC/vehicle-info-eleazar](#))
