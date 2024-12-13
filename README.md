@@ -113,8 +113,8 @@ npx cypress open
 ## Ejecución
 Instalar dependencias:
 ```bash
-npm install
-ng serve
+ npm install --legacy-peer-deps
+ ng serve -o
 ```
 ## Futuras Mejoras
 - **Paginación desde el servidor:** Para manejar datasets gigantes sin cargar todo de golpe.
