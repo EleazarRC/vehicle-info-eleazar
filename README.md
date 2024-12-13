@@ -105,8 +105,10 @@ ng test --code-coverage
 - Selectors: Verificar que filtran y devuelven datos esperados.  
 - Componentes: Asegurar renderizado correcto y respuesta a eventos (ej. filtrado).
 
-**E2E (Cypress) (Opcional):**  
-- Testear el flujo completo: cargar marcas, filtrar, seleccionar una marca y ver detalles.
+**E2E (Cypress) :**  
+```
+npx cypress open
+```
 
 ## Ejecución
 Instalar dependencias:
@@ -117,5 +119,4 @@ ng serve
 ## Futuras Mejoras
 - **Paginación desde el servidor:** Para manejar datasets gigantes sin cargar todo de golpe.
 - **Internacionalización (i18n):** Adaptar la app a múltiples idiomas.
-- **Tests E2E con Cypress:** Garantizar la calidad en flujos completos.
 - **Accesibilidad (ARIA):** Mejorar soporte para lectores de pantalla, teclados, etc.
